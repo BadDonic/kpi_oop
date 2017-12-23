@@ -1,0 +1,6 @@
+/home/daniel/Programming/C#/lab1/lab1/bin/Release/lab1.exe
+/home/daniel/Programming/C#/lab1/lab1/bin/Release/lab1.pdb
+/home/daniel/Programming/C#/lab1/lab1/obj/Release/lab1.csprojResolveAssemblyReference.cache
+/home/daniel/Programming/C#/lab1/lab1/obj/Release/lab1.csproj.CoreCompileInputs.cache
+/home/daniel/Programming/C#/lab1/lab1/obj/Release/lab1.exe
+/home/daniel/Programming/C#/lab1/lab1/obj/Release/lab1.pdb
