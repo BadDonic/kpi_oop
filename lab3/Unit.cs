@@ -51,12 +51,6 @@ namespace lab2
             IsMove = false;
             classOfEntity = "Unit";
             UnitType = "";
-//            foreach (var obj in list)
-//            {
-//                obj.AttackEvent += CheckAttack;
-//                AttackEvent += obj.CheckAttack;
-//            }
-//            list.Add(this);
         }
 
         public Unit(string name, string image, int maxHealth, int speed, int damage) : base(0, image,

@@ -10,9 +10,9 @@ namespace lab2
             try
             {
                 Unit unit1 = new Unit("Dima","", 100, 20, 10);
-                Unit unit2 = new Unit("PIDAR","", 200, 20, 20);
+                Unit unit2 = new Unit("Ivan","", 200, 20, 20);
                 unit1.Attack(unit2);
-                Unit unit3 = new Unit("Unit3","", 100, 20, 5);
+                Unit unit3 = new Unit("Monster","", 100, 20, 5);
             }
             catch (Exception e)
             {

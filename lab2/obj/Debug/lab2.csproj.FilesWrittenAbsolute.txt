@@ -3,3 +3,10 @@
 /home/daniel/Programming/C#/labs/lab2/bin/Debug/lab2.exe
 /home/daniel/Programming/C#/labs/lab2/obj/Debug/lab2.exe
 /home/daniel/Programming/C#/labs/lab2/obj/Debug/lab2.exe.mdb
+/home/daniel/Programming/C#/kpi_oop/lab2/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/daniel/Programming/C#/kpi_oop/lab2/bin/Debug/lab2.exe.mdb
+/home/daniel/Programming/C#/kpi_oop/lab2/bin/Debug/lab2.pdb
+/home/daniel/Programming/C#/kpi_oop/lab2/bin/Debug/lab2.exe
+/home/daniel/Programming/C#/kpi_oop/lab2/obj/Debug/lab2.exe
+/home/daniel/Programming/C#/kpi_oop/lab2/obj/Debug/lab2.exe.mdb
+/home/daniel/Programming/C#/kpi_oop/lab2/obj/Debug/lab2.pdb
