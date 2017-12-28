@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Xml;
 
-namespace lab2
+namespace lab3
 {
     public class Unit : Entity, IAttack<Unit>, IMove
     {
         public event AttackHandle AttackEvent;
         private static List<Unit> list = new List<Unit>();
+        public Action<float> SayCurrentHealth;
+        public Func<float, float> buff;
         protected int damage;
         public int Damage
         {
@@ -63,18 +65,12 @@ namespace lab2
             IsMove = false;
             classOfEntity = "Unit";
             UnitType = "";
-            foreach (var obj in list)
-            {
-                obj.AttackEvent += CheckAttack;
-                AttackEvent += obj.CheckAttack;
-            }
-            list.Add(this);
         }
 
         public override void Update(float time)
         {
-            if (IsMove && IntRect > 1000) IntRect += Speed * time;
-            else IsMove = false;
+            if (buff != null) CurrentHealth = buff(CurrentHealth);
+            SayCurrentHealth?.Invoke(CurrentHealth);
         }
 
         public void Attack(Unit target)
@@ -97,7 +93,6 @@ namespace lab2
                 Console.WriteLine("This unit({0}) attack me({1}) and hit {2} damage", attacker.Name, Name, args.Damage);
                 Console.WriteLine("Current Health = {0}", CurrentHealth);
                 Attack(attacker);
-                Damage++;
             }
         }
 

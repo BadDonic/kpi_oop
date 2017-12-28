@@ -1,1 +1,2 @@
 /home/daniel/Programming/C#/labs/lab1/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/daniel/Programming/C#/kpi_oop/lab1/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs

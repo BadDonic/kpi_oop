@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace lab2
+namespace lab3
 {
     public abstract class Entity
     {
