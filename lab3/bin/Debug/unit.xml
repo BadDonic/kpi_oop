@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Unit xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IntRect>0</IntRect>
+  <Image />
+  <MaxHealth>100</MaxHealth>
+  <CurrentHealth>0</CurrentHealth>
+  <IsLife>true</IsLife>
+  <Damage>10</Damage>
+  <AttackSpeed>0</AttackSpeed>
+  <Speed>100</Speed>
+  <IsAttack>false</IsAttack>
+  <Name>Dima</Name>
+  <Type>Archer</Type>
+  <IsMove>false</IsMove>
+  <IsRun>false</IsRun>
+</Unit>
