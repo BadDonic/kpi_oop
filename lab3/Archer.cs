@@ -2,23 +2,21 @@
 
 namespace lab3
 {
+    [Serializable]
     public class Archer : Unit
     {
         private int arrowNumbers;
 
         public Archer()
         {
-            Console.WriteLine("Archer default constructor");
-            UnitType = "Archer";
+            Type = Type.Archer;
         }
 
         public Archer(string Name, string image, int maxHealth, int damage, int speed, int arrowNumbers,
-            string bowName) : base(Name, image, maxHealth, speed, damage)
+            string bowName) : base(Name, image, maxHealth, speed, damage, Type.Archer)
         {
-            Console.WriteLine("Archer constructor with param");
             this.arrowNumbers = arrowNumbers;
             BowName = bowName;
-            UnitType = "Archer";
         }
 
         public override void Update(float time)

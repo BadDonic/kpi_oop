@@ -1,16 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Xml;
 
 namespace lab3
 {
-    public class Unit : Entity, IAttack<Unit>, IMove
+    public enum Type{
+        Archer, Sword, Slave, Mag, Runner, Zombie
+    }
+    
+    [Serializable]
+    [DataContract]
+    public class Unit : Entity, IAttack<Unit>, IComparable<Unit>, IMove
     {
         public event AttackHandle AttackEvent;
-        private static List<Unit> list = new List<Unit>();
-        public Action<float> SayCurrentHealth;
-        public Func<float, float> buff;
+//        public Action<float> SayCurrentHealth;
+//        public Func<float, float> buff;
+        [DataMember]
         protected int damage;
+        [DataMember]
         public int Damage
         {
             get { return damage; }
@@ -20,42 +28,34 @@ namespace lab3
                     damage = value;
             }
         }
-
+        [DataMember]
         public int AttackSpeed { get; set; }
+        [DataMember]
         public int Speed { get; set; }
+        [DataMember]
         public bool IsAttack { get; set; }
+        [DataMember]
         public string Name { get; set; }
+        [DataMember]
         protected bool isMove;
+        [DataMember]
         protected bool isRun;
-        public string UnitType { get; set; }
-        
-        public bool IsMove
-        {
-            get { return isMove; }
-            set { Speed = !value ? 0 : 100; }
-        }
-
-        public bool IsRun
-        {
-            get { return isRun; }
-            set
-            {
-                if (!value)
-                    Speed -= 100;
-                else
-                    Speed += 100;
-            }
-        }
+        [DataMember]
+        public Type Type{ get; set; }
+        [DataMember]        
+        public bool IsMove { get; set; }
+        [DataMember]
+        public bool IsRun { get; set; }
 
         public Unit()
         {
             Speed = 2;
             IsMove = false;
             classOfEntity = "Unit";
-            UnitType = "";
+            Type = Type.Slave;
         }
 
-        public Unit(string name, string image, int maxHealth, int speed, int damage) : base(0, image,
+        public Unit(string name, string image, int maxHealth, int speed, int damage, Type type) : base(0, image,
             maxHealth)
         {
             Speed = speed;
@@ -64,20 +64,19 @@ namespace lab3
             Name = name;
             IsMove = false;
             classOfEntity = "Unit";
-            UnitType = "";
+            Type = type;
         }
 
         public override void Update(float time)
         {
-            if (buff != null) CurrentHealth = buff(CurrentHealth);
-            SayCurrentHealth?.Invoke(CurrentHealth);
+//            if (buff != null) CurrentHealth = buff(CurrentHealth);
+//            SayCurrentHealth?.Invoke(CurrentHealth);
         }
 
         public void Attack(Unit target)
         {
             AttackEventArgs args = new AttackEventArgs(target, Damage);
-            if (AttackEvent != null)
-                AttackEvent(this, args);
+            AttackEvent?.Invoke(this, args);
         }
 
         public void CheckAttack(Unit attacker, AttackEventArgs args)
@@ -109,6 +108,23 @@ namespace lab3
         public void SitDown()
         {
             Console.WriteLine("Sit Down");
+        }
+        
+        public override string ToString()
+        {
+            return $"UnitType: {Type}| Name: {Name}| Damage: {Damage}| Speed: {Speed}| ( {CurrentHealth} | {MaxHealth} )| Life: {IsLife}\n";
+        }
+
+        public int CompareTo(Unit unit)
+        {
+            int compare = Type.CompareTo(unit.Type);
+            if (compare != 0) return compare;
+            compare = string.CompareOrdinal(Name, unit.Name);
+            if (compare != 0) return compare;
+            compare = Speed.CompareTo(unit.Speed);
+            if (compare != 0) return compare;
+            compare = Damage.CompareTo(unit.Damage);
+            return compare;
         }
     }
 }

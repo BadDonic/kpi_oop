@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 
 namespace lab3
 {
+    [Serializable]
     public abstract class Entity
     {
         protected string classOfEntity;
@@ -47,7 +48,17 @@ namespace lab3
 
         public float MaxHealth { get; set; }
 
-        public float CurrentHealth { get; set; }
+        private float currentHealth;
+
+        public float CurrentHealth
+        {
+            get
+            {
+                if (currentHealth < 0) IsLife = false;
+                return currentHealth;
+            }
+            set { currentHealth = value; }
+    }
 
         public bool IsLife { get; set; }
     }
