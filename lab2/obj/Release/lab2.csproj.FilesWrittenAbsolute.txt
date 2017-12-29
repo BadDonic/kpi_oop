@@ -1,5 +1,0 @@
-/home/daniel/Programming/C#/labs/lab2/obj/Release/.NETFramework,Version=v4.5.AssemblyAttribute.cs
-/home/daniel/Programming/C#/labs/lab2/bin/Release/lab2.exe.mdb
-/home/daniel/Programming/C#/labs/lab2/bin/Release/lab2.exe
-/home/daniel/Programming/C#/labs/lab2/obj/Release/lab2.exe
-/home/daniel/Programming/C#/labs/lab2/obj/Release/lab2.exe.mdb
