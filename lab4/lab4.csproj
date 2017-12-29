@@ -39,8 +39,18 @@
         <Reference Include="System.Xml"/>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Program.cs"/>
-        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Archer.cs" />
+        <Compile Include="AttackEventArgs.cs" />
+        <Compile Include="Building.cs" />
+        <Compile Include="CommandCenter.cs" />
+        <Compile Include="Entity.cs" />
+        <Compile Include="IAttack.cs" />
+        <Compile Include="IMove.cs" />
+        <Compile Include="Program.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Squad.cs" />
+        <Compile Include="SquadExtension.cs" />
+        <Compile Include="Unit.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
