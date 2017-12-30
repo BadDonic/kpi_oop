@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 namespace lab4
 {
     [Serializable]
+    //TODO Відокремлення суперкласу
     public abstract class Entity
     {
         protected string classOfEntity;
@@ -47,7 +48,6 @@ namespace lab4
         public string Image { get; set; }
 
         public float MaxHealth { get; set; }
-
         private float currentHealth;
 
         public float CurrentHealth

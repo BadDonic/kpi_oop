@@ -4,10 +4,11 @@
     {
         private int arrowNumbers;
 
-        public Archer()
-        {
-            UnitType = "Archer";
-        }
+        //TODO G12 - Балласт
+//        public Archer()
+//        {
+//
+//        }
 
         public Archer(string Name, string image, int maxHealth, int damage, int speed, int arrowNumbers,
             string bowName) : base(Name, image, maxHealth, speed, damage)
@@ -20,7 +21,6 @@
         public override void Update(float time)
         {
             Jump();
-            SitDown();
         }
 
         public int ArrowNumbers

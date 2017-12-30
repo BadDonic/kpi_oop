@@ -7,6 +7,5 @@
         bool IsRun { get; set; }
 
         void Jump();
-        void SitDown();
     }
 }

@@ -6,9 +6,15 @@ namespace lab4
 {
     public class Unit : Entity, IAttack<Unit>, IMove
     {
+        //TODO N1 - Используйте содержательные имена
         public event AttackHandle AttackEvent;
-        private static List<Unit> list = new List<Unit>();
+        //TODO Інкапсуляція поля
+//        private static List<Unit> list = new List<Unit>();
+        //TODO Підйом поля
         protected int damage;
+        //TODO Замена "волшебных чисел" именоваными константами
+        private const int DefaultSpeed = 2;
+
         public int Damage
         {
             get { return damage; }
@@ -22,9 +28,11 @@ namespace lab4
         public int AttackSpeed { get; set; }
         public int Speed { get; set; }
         public bool IsAttack { get; set; }
+        //TODO Видалення сеттера
         public string Name { get; set; }
         protected bool isMove;
         protected bool isRun;
+        
         public string UnitType { get; set; }
         
         public bool IsMove
@@ -47,7 +55,7 @@ namespace lab4
 
         public Unit()
         {
-            Speed = 2;
+            Speed = DefaultSpeed;
             IsMove = false;
             classOfEntity = "Unit";
             UnitType = "";
@@ -63,12 +71,7 @@ namespace lab4
             IsMove = false;
             classOfEntity = "Unit";
             UnitType = "";
-            foreach (var obj in list)
-            {
-                obj.AttackEvent += CheckAttack;
-                AttackEvent += obj.CheckAttack;
-            }
-            list.Add(this);
+            Console.WriteLine(Name + " is alive");
         }
 
         public override void Update(float time)
@@ -76,14 +79,16 @@ namespace lab4
             if (IsMove && IntRect > 1000) IntRect += Speed * time;
             else IsMove = false;
         }
-
-        public void Attack(Unit target)
+        
+        //TODO G20 - Имена функций должны описывать выполняемую операцию
+        public void AttackTarget(Unit target)
         {
             AttackEventArgs args = new AttackEventArgs(target, Damage);
             if (AttackEvent != null)
                 AttackEvent(this, args);
         }
 
+        //TODO F1 - Слишком много аргументов
         public void CheckAttack(Unit attacker, AttackEventArgs args)
         {
             if (args.Target == this)
@@ -96,24 +101,31 @@ namespace lab4
                 }
                 Console.WriteLine("This unit({0}) attack me({1}) and hit {2} damage", attacker.Name, Name, args.Damage);
                 Console.WriteLine("Current Health = {0}", CurrentHealth);
-                Attack(attacker);
+                AttackTarget(attacker);
                 Damage++;
             }
         }
 
+        //TODO N4 - Недвусмысленные имена
         public void MakeCriticalHit(Unit target)
         {
             target.CurrentHealth -= 2 * Damage;
         }
 
+        //TODO Підйом методу
         public void Jump()
         {
             Console.WriteLine("Jump");
         }
-
-        public void SitDown()
+        ~Unit()
         {
-            Console.WriteLine("Sit Down");
+            Console.WriteLine(Name + " has been deleted");
         }
+
+        //TODO F4 - Мертвые функции
+//        public void SitDown()
+//        {
+//            Console.WriteLine("Sit Down");
+//        }
     }
 }

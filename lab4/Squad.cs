@@ -6,14 +6,40 @@ namespace lab4
 {
     public class Squad<T> : IEnumerable<T>, IEnumerator<T> where T : Unit
     {
-        private readonly List<T> list;
+        private List<T> list;
         private int position = -1;
-
         public List<T> Units => list;
-
         public string Commander { get; set;}
-
         public int Count => list.Count;
+        private bool disposed = false;
+ 
+        // реализация интерфейса IDisposable.
+        public void Dispose()
+        {
+            Dispose(true);
+            // подавляем финализацию
+            GC.SuppressFinalize(this);
+        }
+ 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed) return;
+            if (disposing)
+            {
+                // Освобождаем управляемые ресурсы
+                list.Clear();
+                list = null;
+            }
+            // освобождаем неуправляемые объекты
+            Console.WriteLine("System disposed");
+            disposed = true;
+        }
+ 
+        // Деструктор
+        ~Squad()
+        {
+            Dispose (false);
+        }
 
         public Squad()
         {
@@ -53,8 +79,6 @@ namespace lab4
             return (position < list.Count);
         }
         
-        public void Dispose() { }
-
         object IEnumerator.Current => Current;
 
         public T Current => list[position];
@@ -72,6 +96,10 @@ namespace lab4
         public void Sort()
         {
             list.Sort();
+        }
+        public bool IsListExist()
+        {
+            return list == null;
         }
     }
 }
