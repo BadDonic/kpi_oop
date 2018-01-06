@@ -43,7 +43,8 @@ namespace lab4
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
 
-                Console.WriteLine("Units does not exist: " + units.IsListExist()); 
+                Console.WriteLine("Units does not exist: " + units.IsListExist());
+                Console.ReadKey();
             }
             catch (Exception e)
             {
