@@ -5,8 +5,77 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:lab5"
         mc:Ignorable="d"
-        Title="Lab5"  Height="350" Width="525">
+        Title="Lab5"  Height="350" Width="535">
+
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64" />
+            <RowDefinition Height="41" />
+            <RowDefinition Height="Auto" MinHeight="214"/>
+        </Grid.RowDefinitions>
+
+
+
+        <Grid Grid.Row="0" DataContext="{Binding SelectedUnit}" VerticalAlignment="Center" Background="RoyalBlue" Height="69" Margin="0,0,0,36" Grid.RowSpan="2">
+            <TextBlock FontWeight="Bold" Foreground="Yellow" Margin="42,10,440,36" FontStyle="Italic"><Run Text="Name"/></TextBlock>
+            <TextBox Margin="434,38,10,8"
+                     Text="{Binding Damage, UpdateSourceTrigger=PropertyChanged}" Background="#FFB6EDFD"/>
+            <TextBlock FontWeight="Bold" Foreground="Yellow" Margin="377,36,88,10" FontStyle="Italic" Text="Damage"/>
+            <TextBox Width="88" Margin="82,8,347,38"
+                         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Background="#FFADE7FD" RenderTransformOrigin="0.665,0.543"/>
+            <TextBlock Foreground="Yellow"  Margin="171,36,312,10" FontWeight="Bold" FontStyle="Italic" Text="Speed"/>
+            <TextBox Margin="210,36,251,10"
+                Text="{Binding Speed, UpdateSourceTrigger=PropertyChanged}" Background="#FFB6EDFD"/>
+            <TextBlock Foreground="Yellow" FontWeight="Bold"  Margin="271,10,195,36" FontStyle="Italic" Text="Health"/>
+            <TextBox Margin="314,10,147,36"
+                Text="{Binding Health, UpdateSourceTrigger=PropertyChanged}" Background="#FFB6EDFD"/>
+        </Grid>
+        <Button x:Name="btnAddBody" Foreground="White"
+                            Content="Add Unit"
+                            Command="{Binding AddCommand}" Background="Green" FontWeight="Bold" Margin="0,5,397,0" Grid.Row="1"/>
+        <Button Foreground="White" x:Name="btnRemoveUnit" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedUnit}" Background="Red" FontWeight="Bold" Margin="378,5,0,0" Grid.Row="1" >
+            Delete
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger 
+                     Binding ="{Binding ElementName=MylistItems, Path=SelectedIndex}" 
+                     Value="-1">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="btnSave"
+                            Content="Save"
+                            Command="{Binding SaveCommand}" FontWeight="Bold" Margin="130,5,274,0" Grid.Row="1"/>
+
+        <ListView x:Name="MylistItems"  Grid.Row="2" BorderBrush="White"
+                   ItemsSource="{Binding Units}"
+                  
+                   SelectedItem="{Binding SelectedUnit}"
+                   HorizontalAlignment="Stretch" FontStyle="Italic" FontWeight="Bold">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="140"
+
+                                    DisplayMemberBinding="{Binding Path=Name}" />
+                    <GridViewColumn Header="Health" Width="125"
+                                    DisplayMemberBinding="{Binding Path=Health}" />
+                    <GridViewColumn Header="Speed" Width="118"
+
+                                    DisplayMemberBinding="{Binding Path=Speed}" />
+                    <GridViewColumn Header="Damage" Width="120"
+
+                                    DisplayMemberBinding="{Binding Path=Damage}" />
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btnOpen"
+            Content="Open"
+            Command="{Binding OpenCommand}" FontWeight="Bold" Margin="253,5,149,0" Grid.Row="1"/>
     </Grid>
 </Window>
