@@ -1,1 +1,1 @@
-KPI OOP C# Labs
+KPI Object Oriented Programming (C#, Java)
