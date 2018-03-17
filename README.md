@@ -1,1 +1,1 @@
-KPI Object Oriented Programming (C#, Java)
+KPI Object Oriented Programming (C#)
