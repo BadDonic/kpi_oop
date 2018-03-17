@@ -5,30 +5,6 @@ using System.Security;
 
 namespace lab6
 {
-    class ClinicTree
-    {
-        static void Main()
-        {
-            Composite clinic = new Composite("KPI-Clinic", new Doctor("Ivanovich", 100));
-            Composite department1 = new Composite("Psyholog...", new Doctor("Petrovich", 78));
-            Composite department2 = new Composite("Xiryrgicheskoe", new Doctor("Blekovich", 50));
-    
-            clinic.Add(department1);
-            clinic.Add(department2);
-            
-            Doctor doctor1 = new Doctor("Daniel", 20);
-            Doctor doctor2 = new Doctor("Viktoria", 10);
-            Doctor doctor3 = new Doctor("Vadim", 5);
-            department1.Add(doctor1);
-            department1.Add(doctor2);
-            department2.Add(doctor3);
-            
-            clinic.GetSickPeoplesInfo();
-            clinic.Display(0);
-            clinic.ConductMedExam("Oleh");
-            clinic.Display(0);
-        }
-    }
     abstract class ClinicComponent
     {
         protected string Name;
@@ -56,10 +32,10 @@ namespace lab6
         private readonly List<ClinicComponent> _children = new List<ClinicComponent>();
         private readonly Doctor _headDoctor;
         
-        public Composite(string name, Doctor heaDoctor) : base(name)
+        public Composite(string name, Doctor headDoctor) : base(name)
         {
             SickPeoples = 0;
-            _headDoctor = heaDoctor;
+            _headDoctor = headDoctor;
         }
 
         public override void Add(ClinicComponent clinicComponent)

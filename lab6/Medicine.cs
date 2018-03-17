@@ -1,48 +1,115 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace lab6
 {
     public enum MedicineType
     {
-        TYPE1, TYPE2, TYPE3
+        antibiotic, anti_inflammatory, stomach
     }
-    public class Medicine
+    class Medicine
     {
-        private string _name;
-        private double _price;
-        private string _expirationDate;
-        private MedicineType _type;
-        public Medicine(string name, MedicineType type, double price, string expirationDate)
+        protected string _name;
+        protected double _price;
+        protected string _expirationDate;
+        protected MedicineType _type;
+
+        public Medicine(){}
+        
+        public Medicine(string name, double price, string expirationDate, MedicineType type)
         {
-            Name = name;
-            Price = price;
-            ExpirationDate = expirationDate;
-            Type = type;
+            _name = name;
+            _price = price;
+            _expirationDate = expirationDate;
+            _type = type;
+        }
+
+        public virtual void Show_Info()
+        {
+            Console.WriteLine("Name: " + _name + "| Price: " + _price + "| Date: " + "| Type: " + _type);
+        }
+
+        public virtual void CheckInList(List<Medicine> list)
+        {
+            foreach (Medicine med in list)
+            {
+                if (med._name == _name)
+                {
+                    Console.WriteLine("Find!!!");
+                    Show_Info();
+                }
+            }
+        }
+        public string Name
+        {
+            get => _name;
+            set => _name = value;
         }
 
         public MedicineType Type
         {
-            get { return _type; }
-            set { _type = value; }
+            get => _type;
+            set => _type = value;
+        }
+    }
+
+    abstract class Decorator : Medicine
+    {
+        protected Medicine medicine;
+
+        public override void CheckInList(List<Medicine> list)
+        {
+            medicine?.CheckInList(list);
         }
 
-        public string Name
+        public override void Show_Info()
         {
-            get { return _name; }
-            set { _name = value; }
+            medicine?.Show_Info();
         }
 
-        public double Price
+        public Decorator(Medicine medicine)
         {
-            get { return _price; }
-            set { _price = value; }
+            this.medicine = medicine;
+        }
+    }
+
+    class ImportMedicine : Decorator
+    {
+        private string _sertificate;
+
+        public ImportMedicine(Medicine med, string sertificate) : base(med)
+        {
+            _sertificate = sertificate;
+        }
+        
+        public override void Show_Info()
+        {
+            Console.WriteLine("This medicine (" + _name + ") is Sertificated by " + _sertificate);
+            base.Show_Info();
         }
 
-        public string ExpirationDate
+        public override void CheckInList(List<Medicine> list)
         {
-            get { return _expirationDate; }
-            set { _expirationDate = value; }
+            foreach (var med in list)
+            {
+                if (med.Name != _name) continue;
+                Console.WriteLine("Find!!!");
+                Show_Info();
+                bool exist = false;
+                Console.Write("Analogs: ");
+                foreach (var it in list)
+                {
+                    if (it.Type != Type || it.Name == Name) continue;
+                    Console.WriteLine();
+                    it.Show_Info();
+                    exist = true;
+
+                }
+                if (!exist)
+                    Console.Write("Nothing"); 
+                return;
+            }
         }
     }
 
