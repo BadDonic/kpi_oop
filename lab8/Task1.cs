@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace lab8
 {
@@ -8,20 +10,25 @@ namespace lab8
         object CloneWithMove(string path);
     }
 
-    public class File : IPrototype
+    public class FileList : IPrototype
     {
-        public string Name { get; set; }
-        public string Dir { get; set; }
-
-        public File(string name, string dir)
+        public string[] List { get; set; }
+        public FileList(string path)
         {
-            Name = name;
-            Dir = dir + "/" + name;
+            try
+            {
+                List = Directory.GetFiles(path);   
+            } 
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
         }
 
         public void ToDisplay()
         {
-            Console.WriteLine($"File: {Dir}");
+            foreach (string it in List)
+                Console.WriteLine($"File: {it}");
         }
 
         public object Clone()
@@ -35,25 +42,38 @@ namespace lab8
             {
                 Console.WriteLine(e.Message);
             }
-
             return clone;
         }
 
         public object CloneWithMove(string path)
         {
-            Object clone = null;
+            var paths = new List<string>();
+            object clone = null;
             try
             {
-                path = path + "/" + Name;
-                if (!System.IO.File.Exists(path))
-                    System.IO.File.Copy(Dir, path);
-                clone = new File(Name, path.Substring(0, path.Length - Name.Length - 1));
+                foreach (var it in List)
+                {
+                    try
+                    {
+                        var fi = new FileInfo(it);
+                        var outPath = path + "/" + fi.Name;
+                        if (!File.Exists(outPath))
+                            File.Copy(fi.FullName, outPath);
+                        paths.Add(outPath);
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+
+                List = paths.ToArray();
+                clone = MemberwiseClone();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-
             return clone;
         }
     }

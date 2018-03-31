@@ -1,8 +1,20 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace lab7
 {
-    class RegistrationSystem
+    interface IOldRegistration
+    {
+        void SignUp(string firstName, string lastName, string city, int age, string email,
+            string address, string keyword, string login, string password);
+    }
+    
+    interface INewRegistration
+    {
+        void SignUp(string firstName, string lastName, string keyword, string login, string password);
+    }
+
+    class System : IOldRegistration
     {
         public void SignUp(string firstName, string lastName, string city, int age, string email,
             string address, string keyword, string login, string password)
@@ -12,28 +24,18 @@ namespace lab7
         }
     }
 
-    class RegistrationFacade
+    class RegistrationAdapter : INewRegistration
     {
-        private RegistrationSystem _system;
+        private IOldRegistration _oldSystem;
 
-        public RegistrationFacade(RegistrationSystem system)
+        public RegistrationAdapter(IOldRegistration system)
         {
-            if (system == null) 
-                system = new RegistrationSystem();
-            _system = system;
+            _oldSystem = system;
         }
         
         public void SignUp(string firstName, string lastName, string keyword, string login, string password)
         {
-            _system.SignUp(firstName, lastName, "City", 0, "Email@email.com", "Address", keyword, login, password);
+            _oldSystem.SignUp(firstName, lastName, "City", 0, "Email@email.com", "Address", keyword, login, password);
         }
     }
-
-//    class NewRegistrationSystem : RegistrationSystem
-//    {
-//        public void SignUp(string firstName, string lastName, string keyword, string login, string password)
-//        {
-//            base.SignUp(firstName, lastName, "City", 0, "Email@email.com", "Address", keyword, login, password);
-//        }
-//    }
 }

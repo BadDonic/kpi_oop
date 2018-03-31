@@ -9,41 +9,21 @@ namespace lab8
         public static void Main(string[] args)
         {
             Console.WriteLine("///////////////// Task1 /////////////////");
-            try
-            {
-                List<File> list = new List<File>();
-                List<File> cloneList = new List<File>();
-                string[] files = Directory.GetFiles("/home/daniel/Programming/kpi_oop/lab8/");
-                foreach (string s in files)
-                {
-                    FileInfo fi;
-                    try
-                    {
-                        fi = new FileInfo(s);
-                        list.Add(new File(fi.Name, fi.DirectoryName));
-                    }
-                    catch (FileNotFoundException e)
-                    {
-                        Console.WriteLine(e.Message);
-                        continue;
-                    }
-
-                    Console.WriteLine($"File: {fi.Name} in {fi.DirectoryName}");
-                }
-
-                foreach (var it in list) cloneList.Add((File) it.Clone());
-                Console.WriteLine("--------------------------- CLONED ---------------------------");
-                foreach (var it in cloneList) it.ToDisplay();
-                Console.WriteLine("--------------------------- CLONED WITH MOVE ---------------------------");
-                string path = "/home/daniel/Programming/kpi_oop/lab8/bin";
-                foreach (var it in list) cloneList.Add((File) it.CloneWithMove(path));
-                foreach (var it in cloneList) it.ToDisplay();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The process failed: {0}", e.ToString());
-            }
+            FileList list = new FileList("/home/daniel/Programming/kpi_oop/lab8/");
+            FileList cloneList = (FileList)list.Clone();
+            Console.WriteLine("///CLONE///");
+            cloneList.ToDisplay();
+            FileList cloneListWithMove = (FileList) list.CloneWithMove("/home/daniel/Programming/kpi_oop/lab8/bin");
+            Console.WriteLine("/// ClONE WITH MOVE ///");
+            cloneListWithMove.ToDisplay();
             Console.WriteLine("///////////////// Task2 /////////////////");
+            Manager manager = new Manager("Daniel");
+            Ticket ticket1 = manager.OrderTicket(TicketType.Entrance, 700);
+            Ticket ticket2 = manager.OrderTicket(TicketType.Default, 1500);
+            Ticket ticket3 = manager.OrderTicket(TicketType.VIP, 1500);
+            Console.WriteLine(ticket1 + $" Price: {ticket1.CountPrice()}");
+            Console.WriteLine(ticket2 + $"Price: {ticket2.CountPrice()}");
+            Console.WriteLine(ticket3 + $"Price: {ticket3.CountPrice()}");
         }
     }
 }
