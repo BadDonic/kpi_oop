@@ -8,12 +8,12 @@ namespace lab6
         private static void Main()
         {
             Console.WriteLine("---Part1---\n");
-            Medicine med1 = new Medicine("med1", 100,"02.02.2019", MedicineType.antibiotic);
-            Medicine med2 = new Medicine("med2", 60,"02.03.2119", MedicineType.anti_inflammatory);
-            Medicine med3 = new Medicine("med3", 30,"12.12.2219", MedicineType.stomach);
+            Medicine med1 = new Medicine("med1", 100,"02.02.2019", MedicineType.Antibiotic);
+            Medicine med2 = new Medicine("med2", 60,"02.03.2119", MedicineType.AntiInflammatory);
+            Medicine med3 = new Medicine("med3", 30,"12.12.2219", MedicineType.Stomach);
 
-            Medicine impMed1 = new ImportMedicine(new Medicine("Import Med1", 200,"04.22.2029", MedicineType.antibiotic), "MIT");
-            Medicine impMed2 = new ImportMedicine(new Medicine("Import Med2", 90,"09.09.2079", MedicineType.stomach), "KPI");
+            Medicine impMed1 = new ImportMedicine(new Medicine("Import Med1", 200,"04.22.2029", MedicineType.Antibiotic), "MIT");
+            Medicine impMed2 = new ImportMedicine(new Medicine("Import Med2", 90,"09.09.2079", MedicineType.Stomach), "KPI");
             List<Medicine> list = new List<Medicine>{med1, med2, med3, impMed2, impMed1};
 
             foreach (Medicine it in list)

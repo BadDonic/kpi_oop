@@ -6,7 +6,7 @@ namespace lab6
 {
     public enum MedicineType
     {
-        antibiotic, anti_inflammatory, stomach
+        Antibiotic, AntiInflammatory, Stomach
     }
     class Medicine
     {
