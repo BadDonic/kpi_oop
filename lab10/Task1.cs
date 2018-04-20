@@ -12,19 +12,36 @@ namespace lab10
 */
     abstract class Group
     {
+        protected int StartTime;
+        protected int FinishTime;
+
+        protected Group(int finishTime, int startTime, Group successor = null)
+        {
+            Successor = successor;
+            FinishTime = finishTime;
+            StartTime = startTime;
+        }
+
         public Group Successor { protected get; set; }
         abstract public void DoWork(DateTime time);
     }
 
     class EarlyGroup : Group
     {
+        public EarlyGroup(int finishTime, int startTime, Group successor = null) : base(finishTime, startTime,
+            successor)
+        {
+        }
+
         public override void DoWork(DateTime time)
         {
-            if (time.Hour >= 6 && time.Hour < 14)
-                Console.WriteLine($"Early Group takes work in {time.Hour}");
+            if (time.Hour >= StartTime && time.Hour < FinishTime - 1)
+                Console.WriteLine($"Early Group takes work on {time.Hour} hour");
             else if (Successor != null)
             {
-                if (time.Hour < 15) Console.WriteLine("Early Group leave work for Afternoon Group");
+                Console.WriteLine((FinishTime - time.Hour < 1)
+                    ? "Early Group leaves work for next group"
+                    : $"Early Group can't do work in {time.Hour} hour");
                 Successor.DoWork(time);
             }
             else
@@ -35,13 +52,20 @@ namespace lab10
 
     class AfternoonGroup : Group
     {
+        public AfternoonGroup(int finishTime, int startTime, Group successor = null) : base(finishTime, startTime,
+            successor)
+        {
+        }
+
         public override void DoWork(DateTime time)
         {
-            if (time.Hour >= 14 && time.Hour < 22)
-                Console.WriteLine($"Afternoon Group takes work in {time.Hour}");
+            if (time.Hour >= StartTime && time.Hour < FinishTime - 1)
+                Console.WriteLine($"Afternoon Group takes work on {time.Hour} hour");
             else if (Successor != null)
             {
-                if (time.Hour < 15) Console.WriteLine("Afternoon Group leave work for Evening Group");
+                Console.WriteLine((FinishTime - time.Hour < 1)
+                    ? "Afternoon Group leaves work for next group"
+                    : $"Afternoon Group can't do work in {time.Hour} hour");
                 Successor.DoWork(time);
             }
             else
@@ -52,13 +76,20 @@ namespace lab10
 
     class EveningGroup : Group
     {
+        public EveningGroup(int finishTime, int startTime, Group successor = null) : base(finishTime, startTime,
+            successor)
+        {
+        }
+
         public override void DoWork(DateTime time)
         {
-            if (time.Hour >= 22 && time.Hour < 6)
-                Console.WriteLine($"Evening Group takes work in {time.Hour}");
+            if (time.Hour >= StartTime || time.Hour < FinishTime - 1)
+                Console.WriteLine($"Evening Group takes work on {time.Hour} hour");
             else if (Successor != null)
             {
-                if (time.Hour < 15) Console.WriteLine("Evening Group leave work for Early Group");
+                Console.WriteLine((FinishTime - time.Hour < 1)
+                    ? "Evening Group leaves work for next group"
+                    : $"Evening Group can't do work in {time.Hour} hour");
                 Successor.DoWork(time);
             }
             else
