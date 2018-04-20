@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace lab9
 {
@@ -14,7 +15,7 @@ namespace lab9
 */
     class OutputSystem
     {
-        public ISaveToFile SaveToFile {private get; set; }
+        public ISaveToFile SaveToFile { private get; set; }
 
         public OutputSystem(ISaveToFile saveToFile)
         {
@@ -44,7 +45,7 @@ namespace lab9
     {
         public void SaveDataToFile(string path, string data)
         {
-            throw new System.NotImplementedException();
+            File.WriteAllText(path, Regex.Replace(data, @"\s+", ""));
         }
     }
 
