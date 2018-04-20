@@ -1,4 +1,6 @@
-﻿namespace lab10
+﻿using System;
+
+namespace lab10
 {
 /*                    Task№ 1
 На певному заводі цілодобово працюють 3 зміни. І зміна – з 6.00 до
@@ -8,4 +10,9 @@
 допомогою шаблону проектування реалізувати механізм обробки
 завдань робітниками описаного заводу.
 */
+    abstract class Group
+    {
+        public Group Successor { protected get; set; }
+        abstract public void DoWork(DateTime time);
+    }
 }
