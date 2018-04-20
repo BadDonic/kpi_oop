@@ -48,6 +48,11 @@ namespace lab9
 
     class FivePercentDiscountState : IDiscountState
     {
+        public FivePercentDiscountState()
+        {
+            Console.WriteLine("New State - (5%)");
+        }
+
         public double Discount(double sum)
         {
             double discount = sum * 0.05;
@@ -66,8 +71,14 @@ namespace lab9
                 (sum >= 10000) ? (IDiscountState) new FifteenPercentDiscountState() : this;
         }
     }
+
     class TenPercentDiscountState : IDiscountState
     {
+        public TenPercentDiscountState()
+        {
+            Console.WriteLine("New State - (10%)");
+        }
+
         public double Discount(double sum)
         {
             double discount = sum * 0.1;
@@ -85,8 +96,14 @@ namespace lab9
             return (sum >= 10000) ? new TenPercentDiscountState() : this;
         }
     }
+
     class FifteenPercentDiscountState : IDiscountState
     {
+        public FifteenPercentDiscountState()
+        {
+            Console.WriteLine("New State - (15%)");
+        }
+
         public double Discount(double sum)
         {
             double discount = sum * 0.15;
