@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace lab9
 {
@@ -11,47 +12,47 @@ namespace lab9
 налаштування програми забезпечити збереження тексту до файлу
 найбільш доцільним способом.
 */
-	class OutputSystem
-	{
-		public ISaveToFile SaveToFile {private get; set; }
+    class OutputSystem
+    {
+        public ISaveToFile SaveToFile {private get; set; }
 
-		public OutputSystem(ISaveToFile saveToFile)
-		{
-			SaveToFile = saveToFile ?? throw new NullReferenceException();
-		}
+        public OutputSystem(ISaveToFile saveToFile)
+        {
+            SaveToFile = saveToFile ?? throw new NullReferenceException();
+        }
 
-		public void SaveDataToFile(string path, string data)
-		{
-			SaveToFile.SaveDataToFile(path, data);
-		}
-	}
+        public void SaveDataToFile(string path, string data)
+        {
+            SaveToFile.SaveDataToFile(path, data);
+        }
+    }
 
-	interface ISaveToFile
-	{
-		void SaveDataToFile(string path, string data);
-	}
+    interface ISaveToFile
+    {
+        void SaveDataToFile(string path, string data);
+    }
 
-	class DefaultSave : ISaveToFile
-	{
-		public void SaveDataToFile(string path, string data)
-		{
-			throw new System.NotImplementedException();
-		}
-	}
+    class DefaultSave : ISaveToFile
+    {
+        public void SaveDataToFile(string path, string data)
+        {
+            File.WriteAllText(path, data);
+        }
+    }
 
-	class SaveWithoutSpaces : ISaveToFile
-	{
-		public void SaveDataToFile(string path, string data)
-		{
-			throw new System.NotImplementedException();
-		}
-	}
+    class SaveWithoutSpaces : ISaveToFile
+    {
+        public void SaveDataToFile(string path, string data)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 
-	class EncryptSave : ISaveToFile
-	{
-		public void SaveDataToFile(string path, string data)
-		{
-			throw new System.NotImplementedException();
-		}
-	}
+    class EncryptSave : ISaveToFile
+    {
+        public void SaveDataToFile(string path, string data)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }
