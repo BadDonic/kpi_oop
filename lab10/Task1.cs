@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace lab10
-
+{
 /*                    Task№ 1
 На певному заводі цілодобово працюють 3 зміни. І зміна – з 6.00 до
 15.00, ІІ зміна – з 14.00 до 23.00 та ІІІ зміна – з 22.00 до 7.00. Якщо
@@ -10,36 +10,60 @@ namespace lab10
 допомогою шаблону проектування реалізувати механізм обробки
 завдань робітниками описаного заводу.
 */
-abstract class Group
-{
-    protected int StartHour;
-    protected int FinishHour;
-
-    protected Group(int startHour, int finishHour, Group successor = null)
+    abstract class Group
     {
-        StartHour = startHour;
-        FinishHour = finishHour;
-        Successor = successor;
+        public Group Successor { protected get; set; }
+        abstract public void DoWork(DateTime time);
     }
 
-    public Group Successor { protected get; set; }
-    abstract public void DoWork(DateTime time);
-}
-
-class EarlyGroup : Group
-{
-    public EarlyGroup(int startHour, int finishHour, Group successor = null) : base(startHour, finishHour, successor)
+    class EarlyGroup : Group
     {
+        public override void DoWork(DateTime time)
+        {
+            if (time.Hour >= 6 && time.Hour < 14)
+                Console.WriteLine($"Early Group takes work in {time.Hour}");
+            else if (Successor != null)
+            {
+                if (time.Hour < 15) Console.WriteLine("Early Group leave work for Afternoon Group");
+                Successor.DoWork(time);
+            }
+            else
+                throw new ApplicationException("ChainOfResponsibility object " +
+                                               "exhausted all successors without call being handled.");
+        }
     }
 
-    public override void DoWork(DateTime time)
+    class AfternoonGroup : Group
     {
-        if (time.Hour >= StartHour && time.Hour < FinishHour - 1)
-            Console.WriteLine("Early Group is doing work");
-        else if (Successor != null)
-            Successor.DoWork(time);
-        else
-            throw new ApplicationException("ChainOfResponsibility object " +
-                                           "exhausted all successors without call being handled.");
+        public override void DoWork(DateTime time)
+        {
+            if (time.Hour >= 14 && time.Hour < 22)
+                Console.WriteLine($"Afternoon Group takes work in {time.Hour}");
+            else if (Successor != null)
+            {
+                if (time.Hour < 15) Console.WriteLine("Afternoon Group leave work for Evening Group");
+                Successor.DoWork(time);
+            }
+            else
+                throw new ApplicationException("ChainOfResponsibility object " +
+                                               "exhausted all successors without call being handled.");
+        }
+    }
+
+    class EveningGroup : Group
+    {
+        public override void DoWork(DateTime time)
+        {
+            if (time.Hour >= 22 && time.Hour < 6)
+                Console.WriteLine($"Evening Group takes work in {time.Hour}");
+            else if (Successor != null)
+            {
+                if (time.Hour < 15) Console.WriteLine("Evening Group leave work for Early Group");
+                Successor.DoWork(time);
+            }
+            else
+                throw new ApplicationException("ChainOfResponsibility object " +
+                                               "exhausted all successors without call being handled.");
+        }
     }
 }
