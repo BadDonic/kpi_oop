@@ -13,6 +13,7 @@ namespace lab9
             card.Pay(1000);
             card.Pay(5000);
             card.Pay(1000);
+            Console.WriteLine("///////////////// Task2 /////////////////");
         }
     }
 }

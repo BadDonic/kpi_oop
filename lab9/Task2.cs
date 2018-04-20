@@ -1,4 +1,6 @@
-﻿namespace lab9
+﻿using System;
+
+namespace lab9
 {
 /*                     Task№ 2
 За допомогою шаблона проектування реалізувати декілька
@@ -9,4 +11,47 @@
 налаштування програми забезпечити збереження тексту до файлу
 найбільш доцільним способом.
 */
+	class OutputSystem
+	{
+		public ISaveToFile SaveToFile {private get; set; }
+
+		public OutputSystem(ISaveToFile saveToFile)
+		{
+			SaveToFile = saveToFile ?? throw new NullReferenceException();
+		}
+
+		public void SaveDataToFile(string path, string data)
+		{
+			SaveToFile.SaveDataToFile(path, data);
+		}
+	}
+
+	interface ISaveToFile
+	{
+		void SaveDataToFile(string path, string data);
+	}
+
+	class DefaultSave : ISaveToFile
+	{
+		public void SaveDataToFile(string path, string data)
+		{
+			throw new System.NotImplementedException();
+		}
+	}
+
+	class SaveWithoutSpaces : ISaveToFile
+	{
+		public void SaveDataToFile(string path, string data)
+		{
+			throw new System.NotImplementedException();
+		}
+	}
+
+	class EncryptSave : ISaveToFile
+	{
+		public void SaveDataToFile(string path, string data)
+		{
+			throw new System.NotImplementedException();
+		}
+	}
 }
