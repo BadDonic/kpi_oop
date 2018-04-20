@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 
 namespace lab9
 {
@@ -23,9 +24,11 @@ namespace lab9
 
         public void Pay(double sum)
         {
+            if (sum < 0) throw new ArgumentException();
+            Console.Write($"Sum without discount: {sum}    ");
             double paidSum = sum - _state.Discount(sum);
             _sum += paidSum;
-            Console.WriteLine($"Client paid: {paidSum}");
+            Console.Write($"Client paid: {paidSum}    ");
             Console.WriteLine($"Paid for all time: {Sum}");
             State = State.NextState(Sum);
         }
@@ -56,7 +59,7 @@ namespace lab9
         public double Discount(double sum)
         {
             double discount = sum * 0.05;
-            Console.WriteLine($"5-% Discount: {discount}");
+            Console.Write($"5-% Discount: {discount}    ");
             return discount;
         }
 
@@ -82,7 +85,7 @@ namespace lab9
         public double Discount(double sum)
         {
             double discount = sum * 0.1;
-            Console.WriteLine($"10-% Discount: {discount}");
+            Console.Write($"10-% Discount: {discount}    ");
             return discount;
         }
 
@@ -93,7 +96,7 @@ namespace lab9
 
         public IDiscountState NextState(double sum)
         {
-            return (sum >= 10000) ? new TenPercentDiscountState() : this;
+            return (sum >= 10000) ? (IDiscountState) new FifteenPercentDiscountState() : this;
         }
     }
 
@@ -107,7 +110,7 @@ namespace lab9
         public double Discount(double sum)
         {
             double discount = sum * 0.15;
-            Console.WriteLine($"15-% Discount: {discount}");
+            Console.Write($"15-% Discount: {discount}    ");
             return discount;
         }
 
