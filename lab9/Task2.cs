@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace lab9
 {
@@ -53,7 +54,7 @@ namespace lab9
     {
         public void SaveDataToFile(string path, string data)
         {
-            throw new System.NotImplementedException();
+            File.WriteAllText(path, Convert.ToBase64String(Encoding.Unicode.GetBytes(data)));
         }
     }
 }
