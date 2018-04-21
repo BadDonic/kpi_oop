@@ -21,7 +21,7 @@ namespace lab8
             } 
             catch (Exception e)
             {
-                Console.WriteLine("The process failed: {0}", e.ToString());
+                Console.WriteLine("The process failed: {0}", e);
             }
         }
 

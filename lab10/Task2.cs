@@ -117,11 +117,6 @@ namespace lab10
             Command = command;
         }
 
-        public void SetCommand(Command command)
-        {
-            Command = command;
-        }
-
         public void Execute()
         {
             Command?.Execute();
