@@ -26,7 +26,7 @@ namespace lab10
             Console.WriteLine($"Add new data to list:{data}");
         }
 
-        public void Rewrite(string prev, string newData)
+        public void Edit(string prev, string newData)
         {
             if (DataList.Contains(prev))
             {
@@ -59,5 +59,52 @@ namespace lab10
         }
 
         public abstract void Execute();
+    }
+
+    class AddCommand : Command
+    {
+        public string Data { get; set; }
+
+        public AddCommand(Database database, string data) : base(database)
+        {
+            Data = data;
+        }
+
+        public override void Execute()
+        {
+            _database.Add(Data);
+        }
+    }
+
+    class EditCommand : Command
+    {
+        public string Prev { get; set; }
+        public string NewData { get; set; }
+
+        public EditCommand(Database database, string prev, string newData) : base(database)
+        {
+            Prev = prev;
+            NewData = newData;
+        }
+
+        public override void Execute()
+        {
+            _database.Edit(Prev, NewData);
+        }
+    }
+
+    class RemoveCommand : Command
+    {
+        public string Data { get; set; }
+
+        public RemoveCommand(Database database, string data) : base(database)
+        {
+            Data = data;
+        }
+
+        public override void Execute()
+        {
+            _database.Remove(Data);
+        }
     }
 }
