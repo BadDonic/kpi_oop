@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace lab10
 {
@@ -13,6 +14,21 @@ namespace lab10
             eveningGroup.Successor = earlyGroup;
             earlyGroup.DoWork(DateTime.Now);
             Console.WriteLine("///////////////// Task2 /////////////////");
+            Database database = new Database(new List<string>());
+            AddCommand addCommand = new AddCommand(database, "data");
+            EditCommand editCommand = new EditCommand(database, "lab", "data");
+            RemoveCommand removeCommand = new RemoveCommand(database, "data");
+            Invoker invoker = new Invoker(addCommand);
+            invoker.Execute();
+            invoker.Command = editCommand;
+            invoker.Execute();
+            editCommand.Prev = "data";
+            editCommand.NewData = "lab";
+            invoker.Execute();
+            invoker.Command = removeCommand;
+            invoker.Execute();
+            removeCommand.Data = "lab";
+            invoker.Execute();
         }
     }
 }

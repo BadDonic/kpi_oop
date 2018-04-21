@@ -122,7 +122,7 @@ namespace lab10
             Command = command;
         }
 
-        void Execute()
+        public void Execute()
         {
             Command?.Execute();
         }
