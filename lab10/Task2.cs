@@ -107,4 +107,24 @@ namespace lab10
             _database.Remove(Data);
         }
     }
+
+    class Invoker
+    {
+        public Command Command { private get; set; }
+
+        public Invoker(Command command)
+        {
+            Command = command;
+        }
+
+        public void SetCommand(Command command)
+        {
+            Command = command;
+        }
+
+        void Execute()
+        {
+            Command?.Execute();
+        }
+    }
 }
