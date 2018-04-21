@@ -48,4 +48,16 @@ namespace lab10
                 Console.WriteLine($"Can not found this data:{removeData}");
         }
     }
+
+    abstract class Command
+    {
+        protected Database _database;
+
+        protected Command(Database database)
+        {
+            _database = database;
+        }
+
+        public abstract void Execute();
+    }
 }
