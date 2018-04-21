@@ -15,7 +15,7 @@ namespace lab10
         protected int StartTime;
         protected int FinishTime;
 
-        protected Group(int finishTime, int startTime, Group successor = null)
+        protected Group(int startTime, int finishTime, Group successor = null)
         {
             Successor = successor;
             FinishTime = finishTime;
@@ -28,7 +28,7 @@ namespace lab10
 
     class EarlyGroup : Group
     {
-        public EarlyGroup(int finishTime, int startTime, Group successor = null) : base(finishTime, startTime,
+        public EarlyGroup(int startTime, int finishTime, Group successor = null) : base(startTime, finishTime,
             successor)
         {
         }
@@ -52,7 +52,7 @@ namespace lab10
 
     class AfternoonGroup : Group
     {
-        public AfternoonGroup(int finishTime, int startTime, Group successor = null) : base(finishTime, startTime,
+        public AfternoonGroup(int startTime, int finishTime, Group successor = null) : base(startTime, finishTime,
             successor)
         {
         }
@@ -76,7 +76,7 @@ namespace lab10
 
     class EveningGroup : Group
     {
-        public EveningGroup(int finishTime, int startTime, Group successor = null) : base(finishTime, startTime,
+        public EveningGroup(int startTime, int finishTime, Group successor = null) : base(startTime, finishTime,
             successor)
         {
         }
